@@ -11,9 +11,14 @@ for year in range(1970, datetime.datetime.now().year + 1):
     YEAR_CHOICES_LIST.append((year, year))
 YEAR_CHOICES = tuple(YEAR_CHOICES_LIST)
 
+MANUFACTURER_CHOICES = (('BMW', 'Bayerische Motoren Werke'), ('Mercedes-Benz', 'Mercedes-Benz'), ('VW', 'Volkswagen'))
+
 
 class CarMaker(models.Model):
-    manufacturer = models.CharField(max_length=20)
+    manufacturer = models.CharField(max_length=20, choices=MANUFACTURER_CHOICES)
+
+    def __str__(self):
+        return "Manufacturer: " + self.manufacturer
 
 
 class Car(models.Model):
@@ -23,16 +28,29 @@ class Car(models.Model):
     fuel_type = models.CharField(choices=FUEL_CHOICES, default='Petrol', max_length=30)
     mileage = models.PositiveIntegerField(default=0)
     price = models.PositiveIntegerField(default=0)
-    manufacturing_year = models.IntegerField(choices=YEAR_CHOICES, default=datetime.datetime.now().year+1)
+    manufacturing_year = models.IntegerField(choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     available = models.BooleanField(default=True)
     discount = models.FloatField(blank=True, default=0.0)
+    last_update_date = models.DateTimeField(auto_now=True)
     # TO BE DONE
     # add avatar/image
+
+    class Meta:
+        ordering = ('last_update_date',)
+
+    def __str__(self):
+        return "Model: " + self.model
 
 
 class Purchase(models.Model):
     user = models.ForeignKey('auth.User', related_name='purchases', on_delete=models.CASCADE)
-    car = models.ForeignKey(Car, related_name='purchased', on_delete=models.CASCADE)
+    car = models.ForeignKey(Car, related_name='purchases', on_delete=models.CASCADE)
     purchase_date = models.DateTimeField(auto_now_add=True)
     credit_card_number = models.PositiveIntegerField()
     price_paid = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ('purchase_date',)
+
+    def __str__(self):
+        return "Car model: " + self.car.model + " Purchased by user: " + self.user.username
