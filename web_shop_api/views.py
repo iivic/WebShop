@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from web_shop_api.models import Car, CarMaker, Purchase
 from django.contrib.auth.models import User
 from web_shop_api.serializers import UserSerializer, CarMakerSerializer, CarSerializer, PurchaseSerializer
-from rest_framework import permissions
+from rest_framework import permissions, filters
 from web_shop_api.permissions import IsOwnerOrReadOnly, IsAdminOrReadOnly
 
 
@@ -12,6 +12,8 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('username',)
 
 
 class CarMakerViewSet(viewsets.ReadOnlyModelViewSet):
@@ -20,6 +22,8 @@ class CarMakerViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = CarMaker.objects.all()
     serializer_class = CarMakerSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('manufacturer',)
 
 
 class CarViewSet(viewsets.ModelViewSet):
@@ -30,6 +34,8 @@ class CarViewSet(viewsets.ModelViewSet):
     serializer_class = CarSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('maker', 'model', 'location')
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
