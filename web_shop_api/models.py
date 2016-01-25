@@ -32,6 +32,7 @@ class Car(models.Model):
     available = models.BooleanField(default=True)
     discount = models.FloatField(blank=True, default=0.0)
     last_update_date = models.DateTimeField(auto_now=True)
+    owner = models.ForeignKey('auth.User', related_name='cars', on_delete=models.CASCADE)
     # TO BE DONE
     # add avatar/image
 
@@ -46,7 +47,7 @@ class Purchase(models.Model):
     user = models.ForeignKey('auth.User', related_name='purchases', on_delete=models.CASCADE)
     car = models.ForeignKey(Car, related_name='purchases', on_delete=models.CASCADE)
     purchase_date = models.DateTimeField(auto_now_add=True)
-    credit_card_number = models.PositiveIntegerField()
+    credit_card_number = models.PositiveIntegerField(blank=True, null=True)
     price_paid = models.PositiveIntegerField(default=0)
 
     class Meta:

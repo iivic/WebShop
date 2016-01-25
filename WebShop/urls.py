@@ -15,9 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from rest_framework.routers import DefaultRouter
+from web_shop_api import views
+
+router = DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'car-maker', views.CarMakerViewSet)
+router.register(r'cars', views.CarViewSet)
+router.register(r'purchase', views.PurchaseViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    # url(r'^', include('web_shop_api.urls')),
+    url(r'^', include(router.urls)),
 ]
