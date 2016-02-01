@@ -1,0 +1,16 @@
+/* #dbe9d8 #c2d4d8 #f2efe8 #b0aac2 */
+
+body{
+    background-color: #e3e3e3;
+}
+#main-content{
+    background-color: #f2efe8;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+    min-height: 90vh;
+}
+#main-footer{
+    margin-top: 10px;
+    text-align: center;
+}
