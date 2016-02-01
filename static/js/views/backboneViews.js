@@ -13,5 +13,5 @@ app.SingleCarMakerView = Backbone.View.extend({
     },
 });
 
-var testView = app.SingleCarMakerView();
+var testView = new app.SingleCarMakerView;
 
