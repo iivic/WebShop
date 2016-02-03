@@ -11,7 +11,8 @@ for year in range(1970, datetime.datetime.now().year + 1):
     YEAR_CHOICES_LIST.append((year, year))
 YEAR_CHOICES = tuple(YEAR_CHOICES_LIST)
 
-MANUFACTURER_CHOICES = (('BMW', 'Bayerische Motoren Werke'), ('Mercedes-Benz', 'Mercedes-Benz'), ('VW', 'Volkswagen'))
+MANUFACTURER_CHOICES = (('BMW', 'Bayerische Motoren Werke'), ('Mercedes-Benz', 'Mercedes-Benz'),
+                        ('VW', 'Volkswagen'))
 
 
 class CarMaker(models.Model):

@@ -1,16 +1,99 @@
 /* #dbe9d8 #c2d4d8 #f2efe8 #b0aac2 */
 
-body{
+body {
     background-color: #e3e3e3;
 }
-#main-content{
+
+#main-content {
     background-color: #f2efe8;
-    margin-left: 10%;
-    margin-right: 10%;
     text-align: center;
-    min-height: 90vh;
+    min-height: 95vh;
+    color: #737373;
+    margin-bottom: 10px;
 }
-#main-footer{
-    margin-top: 10px;
+
+#main-footer {
     text-align: center;
+    background-color: #222;
+    border-color: #080808;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    color: #9d9d9d;
+}
+
+.copyrights {
+    padding-top: 13px;
+}
+
+.img-fit {
+    height: 160px;
+    width: 160px;
+}
+
+#content {
+    max-width: 100%;
+}
+
+.car-maker-p {
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+article.car-maker a {
+    color: inherit;
+}
+
+#main-content .jumbotron {
+    background-color: inherit;
+}
+
+.cars-number-p {
+    color: #9d9d9d;
+}
+
+.car-maker section a:hover, a:focus{
+    text-decoration: none;
+}
+a:focus{
+    outline: none;
+}
+
+.car-info {
+    height: 170px;
+    margin-bottom: 5px;
+    background-color: #dbe9d8;
+    padding: 10px;
+    text-align: left;
+    line-height: 0.5em;
+}
+
+.car-image {
+    width: 30%;
+    float: left;
+    height: 100%;
+    max-height: 100%;
+}
+
+.car-description {
+    float: right;
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.car-title {
+    font-size: 1.16667em;
+}
+
+.car-price {
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: right;
+}
+
+.car-image img {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
 }

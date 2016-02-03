@@ -1,0 +1,33 @@
+<script type="text/template" id="carMakersTemplate">
+    <article class="car-maker row">
+        <%
+        var carNumber = 0;
+        _.each( data, function(maker){
+        carNumber += maker.cars.length;
+        });
+        %>
+        <section class="col-md-3 col-sm-6">
+            <a href="#All">
+                <img src="/static/images/all-cars-icon.png" class="img-circle img-fit">
+
+                <p class="car-maker-p">All</p>
+
+                <p class="cars-number-p"><%- carNumber %></p>
+            </a>
+        </section>
+        <%
+        var logList = ['/static/images/bmw-logo.jpg', '/static/images/mercedes-benz1.png', '/static/images/vw-logo.png']
+        _.each( data, function( maker, i ){
+        %>
+        <section class="col-md-3 col-sm-6">
+            <a href="#<%- maker.manufacturer %>">
+                <img src="<%- logList[i] %>" class="img-circle img-fit">
+
+                <p class="car-maker-p"><%- maker.manufacturer %></p>
+
+                <p class="cars-number-p"><%- maker.cars.length %></p>
+            </a>
+        </section>
+        <% }); %>
+    </article>
+</script>
