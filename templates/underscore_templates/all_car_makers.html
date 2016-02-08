@@ -7,7 +7,7 @@
         });
         %>
         <section class="col-md-3 col-sm-6">
-            <a href="#All">
+            <a href="#car-maker/0">
                 <img src="/static/images/all-cars-icon.png" class="img-circle img-fit">
 
                 <p class="car-maker-p">All</p>
@@ -20,7 +20,7 @@
         _.each( data, function( maker, i ){
         %>
         <section class="col-md-3 col-sm-6">
-            <a href="#<%- maker.manufacturer %>">
+            <a href="#car-maker/<%- maker.id %>">
                 <img src="<%- logList[i] %>" class="img-circle img-fit">
 
                 <p class="car-maker-p"><%- maker.manufacturer %></p>

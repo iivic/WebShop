@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <article class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+        <img id="logo" src="{% static 'images/logo.png' %}" alt="Logo" class="hidden-xs">
+
+        <h1 class="text-center">Web Shop</h1>
+
+        <div id="login-form">
+            <p>Please enter your data.</p>
+
+            <form method="post">
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">{{ form.errors }}</div>
+                {% endif %}
+                {% for field in form %}
+                    <div class="form-group">
+                        {% render_field field placeholder=field.label class="form-control"%}
+                    </div>
+                {% endfor %}
+                <input type="submit" value="Register" class="btn btn-primary btn-lg btn-block">
+            </form>
+            <a href="{% url 'login' %}" class="pull-right">Login</a>
+        </div>
+    </article>
+{% endblock %}

@@ -1,0 +1,68 @@
+<script type="text/template" id="carDetailsTemplate">
+    <%
+    var newDate = data.last_update_date.split('T')[0].split("-");
+    newDate = newDate[1]+'.'+newDate[2]+'.'+newDate[0];
+    %>
+    <section class="car-details-image col-sm-offset-1 col-sm-4">
+        <img src="/static/images/all-cars-icon.png" class="car-detail-image-img">
+    </section>
+    <section class="car-details col-sm-offset-1 col-sm-5">
+        <table class="car-details-table">
+            <tr>
+                <th>Maker :</th>
+                <td><%- carMaker.manufacturer %></td>
+            </tr>
+            <tr>
+                <th>Model :</th>
+                <td><%- data.model %></td>
+            </tr>
+            <tr>
+                <th>Owner :</th>
+                <td><%- data.owner %></td>
+            </tr>
+            <tr>
+                <th>Location :</th>
+                <td><%- data.location %></td>
+            </tr>
+            <tr>
+                <th>Fuel type :</th>
+                <td><%- data.fuel_type %></td>
+            </tr>
+            <tr>
+                <th>Mileage :</th>
+                <td><%- data.mileage %> km</td>
+            </tr>
+            <tr>
+                <th>Price :</th>
+                <td><%- data.price %> €</td>
+            </tr>
+            <tr>
+                <th>Manufacturing year :</th>
+                <td><%- data.manufacturing_year %></td>
+            </tr>
+            <tr>
+                <th>Status :</th>
+                <td><%- (data.available) ? 'Available' : 'Sold' %></td>
+            </tr>
+            <tr>
+                <th>Discount :</th>
+                <td><%- (data.discount==0) ? 'None' : data.discount+" %" %></td>
+            </tr>
+            <tr>
+                <th>Last update :</th>
+                <td><%- newDate %></td>
+            </tr>
+        </table>
+        <% if (data.owner != authUserUsername) { %>
+        <button class="btn btn-success btn-block">Purchase</button>
+        <% }
+        else if(data.available == false){
+        %>
+        <button class="btn btn-danger btn-block">Sold</button>
+        <% }
+        else if(data.owner == authUserUsername){
+        %>
+        <button class="btn btn-danger btn-block">Your car</button>
+        <% } %>
+    </section>
+</script>

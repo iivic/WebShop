@@ -2,33 +2,40 @@
 var app = app || {};
 
 app.MainRouter = Backbone.Router.extend({
-    routes:{
+    routes: {
         "": "mainPage",
-        "All": "allCarsPage",
-        "BMW": "allBMWs",
-        "Mercedes-Benz": "allMerc",
-        "VW": "allVW",
+        "car-maker/:id": "showCars",
+        "cars/:id": "showCarDetails",
+        "my-cars": "showMyCars",
+        "my-purchases": "showMyPurchases"
     },
 
-    mainPage: function(){
-        var mainAppView = new app.MainAppView({collection: allCarMakers});
+    mainPage: function () {
+        var allCarMakers = new app.CarMakersCollection();
+        new app.MainAppView({collection: allCarMakers});
     },
-    allCarsPage: function(){
-        var chosenCarMakerView = new app.ChosenCarMakerView({collection: allCars});
+    showCars: function (id) {
+        id = (id === '0') ? "" : id;
+        var allCars = new app.CarsCollection([], {path: 'cars/?maker=' + id});
+        new app.ChosenCarMakerView({collection: allCars});
     },
-    allBMWs: function(){
-        var bmwCars = new app.BmwCollection();
-        var chosenCarMakerView = new app.ChosenCarMakerView({collection: bmwCars});
+    showCarDetails: function (id) {
+        var car = new app.CarModel([], {path: 'cars/' + id});
+        new app.ChosenCarView({model: car});
     },
-    allMerc: function(){
-        var mercCars = new app.MercCollection();
-        var chosenCarMakerView = new app.ChosenCarMakerView({collection: mercCars});
+    showMyCars: function (){
+        var cars = new app.CarModel([], {path: 'cars/?owner=' + authUserId});
+        new app.CurrentUserCars({model: cars});
     },
-    allVW: function(){
-        var vwCars = new app.VwCollection();
-        var chosenCarMakerView = new app.ChosenCarMakerView({collection: vwCars});
+    showMyPurchases: function () {
+        var purchases = new app.PurchaseModel([], {path: 'purchase/?user=' + authUserId});
+        new app.CurrentUserPurchases({model: purchases});
     }
 });
 
 var mainRouter = new app.MainRouter();
 Backbone.history.start();
+
+/*Backbone.history.on("all", function (route, router) {
+    console.log(window.location.hash);
+});*/

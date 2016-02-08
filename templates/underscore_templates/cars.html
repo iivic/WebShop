@@ -4,6 +4,7 @@
         <%
         _.each( data, function(car){
             var newDate = car.last_update_date.split('T')[0].split("-");
+            newDate = newDate[1]+'.'+newDate[2]+'.'+newDate[0];
             var available = (car.available) ? "Available" : "Sold"
         %>
         <section class="car-info col-xs-8 col-xs-offset-2">
@@ -12,11 +13,11 @@
             </div>
             <div class="car-description col-sm-7 col-xs-12">
                 <h3 class="car-title">
-                    <a class="car-link" href="#"> <%- car.model %></a>
+                    <a class="car-link" href="#cars/<%- car.id %>"> <%- car.model %></a>
                 </h3>
                 <p>Mileage: <%- car.mileage %> km</p>
                 <p>Location: <%- car.location %></p>
-                <p>Updated: <%- newDate[1]+'.'+newDate[2]+'.'+newDate[0]  %>
+                <p>Updated: <%- newDate %>
                 <p>Status: <%- available %></p>
                 <p class="car-price"><%- car.price %> €</p>
             </div>

@@ -23,7 +23,7 @@ class CarMakerViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = CarMaker.objects.all()
     serializer_class = CarMakerSerializer
     filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('manufacturer',)
+    filter_fields = ('id',)
 
 
 class CarViewSet(viewsets.ModelViewSet):
@@ -35,7 +35,7 @@ class CarViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
     filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('maker', 'model', 'location')
+    filter_fields = ('maker', 'model', 'location', 'owner')
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -50,6 +50,8 @@ class PurchaseViewSet(viewsets.ModelViewSet):
     serializer_class = PurchaseSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsAdminOrReadOnly)
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('user', )
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

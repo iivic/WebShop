@@ -1,15 +1,14 @@
 /* #dbe9d8 #c2d4d8 #f2efe8 #b0aac2 */
 
 body {
-    background-color: #e3e3e3;
+    background: linear-gradient(to left, white, gray);
 }
 
 #main-content {
-    background-color: #f2efe8;
+    background: linear-gradient(to right, white, gray);
     text-align: center;
     min-height: 95vh;
-    color: #737373;
-    margin-bottom: 10px;
+    padding-bottom: 5em;
 }
 
 #main-footer {
@@ -49,13 +48,14 @@ article.car-maker a {
 }
 
 .cars-number-p {
-    color: #9d9d9d;
+    color: #000000;
 }
 
-.car-maker section a:hover, a:focus{
+.car-maker section a:hover, a:focus {
     text-decoration: none;
 }
-a:focus{
+
+a:focus {
     outline: none;
 }
 
@@ -96,4 +96,62 @@ a:focus{
     max-width: 100%;
     max-height: 100%;
     height: auto;
+}
+
+.car-details, .purchase-details {
+    background-color: #dbe9d8;
+    border: 1px solid #d0d0ce;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.car-details-image {
+
+}
+
+.car-detail-image-img {
+    width: 100%;
+    height: auto;
+}
+
+.purchase-details {
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.car-details-table, .purchase-details-table {
+    width: 100%;
+    line-height: 2em;
+}
+
+.car-details-table th, .purchase-details-table th{
+    text-align: left;
+}
+
+.car-details-table td, .purchase-details-table td {
+    text-align: left;
+}
+
+.car-details-table tr, .purchase-details-table tr {
+    border-bottom: 1px solid #d0d0ce;
+}
+
+.car-details button{
+    margin: 5px 0px 5px 0px;
+}
+
+#aside-menu{
+    background: linear-gradient(to bottom, white, #bfbfbf);
+    height: 150px;
+    width: 200px;
+    position: fixed;
+    top: 10vh;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.aside-group{
+    margin: 15px;
+    font-size: 18px;
+    line-height: 2em;
 }

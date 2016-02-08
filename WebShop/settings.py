@@ -39,7 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'web_shop_api',
-    'backbone_web_shop'
+    'backbone_web_shop',
+    'widget_tweaks',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -110,3 +111,8 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
+
+# Login and logout urls
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'web_shop:index'
