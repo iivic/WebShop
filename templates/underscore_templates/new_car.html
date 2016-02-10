@@ -1,0 +1,84 @@
+<script type="text/template" id="addNewCarTemplate">
+    <%
+    fuelChoices = ['Petrol', 'Diesel', 'Electric', 'Ethanol (FFV, E85 etc.)', 'Hybrid', 'Natural Gas', 'Hydrogen', 'Other'];
+    var date = new Date();
+    var year = date.getFullYear();
+    var yearChoices = [];
+    for(var i = 1970; i < year+1; i++){
+        yearChoices.push(i);
+    }
+    %>
+    <section class="new-car-form form-horizontal col-sm-offset-3 col-sm-6">
+        <fieldset class="new-car-table">
+            <div class="form-group">
+                <label class="control-label col-sm-3">Maker</label>
+
+                <div class="col-sm-8">
+                    <select name="maker" class="form-control">
+                        <% _.each(carMakers, function(maker){ %>
+                        <option value="<%- maker.id %>"><%- maker.manufacturer %></option>
+                        <% }); %>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Model</label>
+
+                <div class="col-sm-8">
+                    <input name="model" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Location</label>
+
+                <div class="col-sm-8">
+                    <input name="location" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Fuel type</label>
+
+                <div class="col-sm-8">
+                    <select name="fuel_type" class="form-control" type="text">
+                        <% _.each(fuelChoices, function(fuel){ %>
+                        <option value="<%- fuel %>"><%- fuel %></option>
+                        <% }); %>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Mileage</label>
+
+                <div class="col-sm-8">
+                    <input name="mileage" class="form-control" type="number" placeholder="In km">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Price</label>
+
+                <div class="col-sm-8">
+                    <input name="price" class="form-control" type="number" placeholder="In euros €">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Man. year</label>
+
+                <div class="col-sm-8">
+                    <select name="manufacturing_year" class="form-control">
+                        <% _.each(yearChoices, function(year){ %>
+                        <option value="<%- year %>"><%- year %></option>
+                        <% }); %>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Discount</label>
+
+                <div class="col-sm-8">
+                    <input name="discount" class="form-control" type="number" placeholder="In %">
+                </div>
+            </div>
+        </fieldset>
+        <button id="new-car-button" class="btn btn-info btn-block">Save</button>
+    </section>
+</script>

@@ -98,7 +98,7 @@ a:focus {
     height: auto;
 }
 
-.car-details, .purchase-details {
+.car-details, .purchase-details, .new-car-form {
     background-color: #dbe9d8;
     border: 1px solid #d0d0ce;
     -webkit-border-radius: 4px;
@@ -114,7 +114,7 @@ a:focus {
     height: auto;
 }
 
-.purchase-details {
+.purchase-details, .new-car-form {
     margin-bottom: 20px;
     padding: 15px;
 }
@@ -128,16 +128,20 @@ a:focus {
     text-align: left;
 }
 
-.car-details-table td, .purchase-details-table td {
+.car-details-table td, .purchase-details-table td{
     text-align: left;
 }
 
-.car-details-table tr, .purchase-details-table tr {
+.car-details-table tr, .purchase-details-table tr{
     border-bottom: 1px solid #d0d0ce;
 }
 
 .car-details button{
     margin: 5px 0px 5px 0px;
+}
+.new-car-form button{
+    margin: 10px 0 0 10%;
+    width: 81%;
 }
 
 #aside-menu{

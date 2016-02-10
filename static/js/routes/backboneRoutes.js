@@ -7,7 +7,8 @@ app.MainRouter = Backbone.Router.extend({
         "car-maker/:id": "showCars",
         "cars/:id": "showCarDetails",
         "my-cars": "showMyCars",
-        "my-purchases": "showMyPurchases"
+        "my-purchases": "showMyPurchases",
+        "add-car": "addNewCar"
     },
 
     mainPage: function () {
@@ -30,6 +31,9 @@ app.MainRouter = Backbone.Router.extend({
     showMyPurchases: function () {
         var purchases = new app.PurchaseModel([], {path: 'purchase/?user=' + authUserId});
         new app.CurrentUserPurchases({model: purchases});
+    },
+    addNewCar: function () {
+        new app.AddNewCar({});
     }
 });
 
