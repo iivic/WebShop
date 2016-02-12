@@ -1,4 +1,4 @@
-<script type="text/template" id="addNewCarTemplate">
+<script type="text/template" id="carUpdateTemplate">
     <%
     fuelChoices = ['Petrol', 'Diesel', 'Electric', 'Ethanol (FFV, E85 etc.)', 'Hybrid', 'Natural Gas', 'Hydrogen', 'Other'];
     var date = new Date();
@@ -8,40 +8,29 @@
         yearChoices.push(i);
     }
     %>
-    <section class="new-car-form form-horizontal col-sm-offset-3 col-sm-6">
-        <fieldset class="new-car-table">
-            <div class="form-group">
-                <label class="control-label col-sm-3">Maker</label>
-
-                <div class="col-sm-8">
-                    <select id="maker" class="form-control">
-                        <% _.each(carMakers, function(maker){ %>
-                        <option value="<%- maker.id %>"><%- maker.manufacturer %></option>
-                        <% }); %>
-                    </select>
-                </div>
-            </div>
+    <section class="update-car-form form-horizontal col-sm-offset-3 col-sm-6">
+        <fieldset class="update-car-table">
             <div class="form-group">
                 <label class="control-label col-sm-3">Model</label>
 
                 <div class="col-sm-8">
-                    <input id="model" class="form-control" type="text">
+                    <input id="upd-model" class="form-control" type="text" value="<%- data.model %>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3">Location</label>
 
                 <div class="col-sm-8">
-                    <input id="location" class="form-control" type="text">
+                    <input id="upd-location" class="form-control" type="text" value="<%- data.location %>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3">Fuel type</label>
 
                 <div class="col-sm-8">
-                    <select id="fuel_type" class="form-control" type="text">
+                    <select id="upd-fuel_type" class="form-control" type="text">
                         <% _.each(fuelChoices, function(fuel){ %>
-                        <option value="<%- fuel %>"><%- fuel %></option>
+                        <option value="<%- fuel %>" <% if(data.fuel_type==fuel){ %> selected <% } %> ><%- fuel %></option>
                         <% }); %>
                     </select>
                 </div>
@@ -50,23 +39,23 @@
                 <label class="control-label col-sm-3">Mileage</label>
 
                 <div class="col-sm-8">
-                    <input id="mileage" class="form-control" type="number" placeholder="In km">
+                    <input id="upd-mileage" class="form-control" type="number" placeholder="In km" value="<%- data.mileage %>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3">Price</label>
 
                 <div class="col-sm-8">
-                    <input id="price" class="form-control" type="number" placeholder="In euros €">
+                    <input id="upd-price" class="form-control" type="number" placeholder="In euros €" value="<%- data.price %>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3">Man. year</label>
 
                 <div class="col-sm-8">
-                    <select id="manufacturing_year" class="form-control">
+                    <select id="upd-manufacturing_year" class="form-control">
                         <% _.each(yearChoices, function(year){ %>
-                        <option value="<%- year %>"><%- year %></option>
+                        <option value="<%- year %>" <% if(data.manufacturing_year==year){ %> selected <% } %> ><%- year %></option>
                         <% }); %>
                     </select>
                 </div>
@@ -75,10 +64,10 @@
                 <label class="control-label col-sm-3">Discount</label>
 
                 <div class="col-sm-8">
-                    <input id="discount" class="form-control" type="number" placeholder="In %">
+                    <input id="upd-discount" class="form-control" type="number" placeholder="In %" value="<%- data.discount %>">
                 </div>
             </div>
         </fieldset>
-        <button id="new-car-button" class="btn btn-info btn-block">Save</button>
+        <button id="update-car-button" class="btn btn-info btn-block">Update</button>
     </section>
 </script>

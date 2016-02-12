@@ -46,6 +46,9 @@ article.car-maker a {
 #main-content .jumbotron {
     background-color: inherit;
 }
+.jumbotron{
+    padding-bottom: 24px;
+}
 
 .cars-number-p {
     color: #000000;
@@ -98,7 +101,7 @@ a:focus {
     height: auto;
 }
 
-.car-details, .purchase-details, .new-car-form {
+.car-details, .purchase-details, .new-car-form, .update-car-form {
     background-color: #dbe9d8;
     border: 1px solid #d0d0ce;
     -webkit-border-radius: 4px;
@@ -114,7 +117,7 @@ a:focus {
     height: auto;
 }
 
-.purchase-details, .new-car-form {
+.purchase-details, .new-car-form, .update-car-form {
     margin-bottom: 20px;
     padding: 15px;
 }
@@ -124,27 +127,28 @@ a:focus {
     line-height: 2em;
 }
 
-.car-details-table th, .purchase-details-table th{
+.car-details-table th, .purchase-details-table th {
     text-align: left;
 }
 
-.car-details-table td, .purchase-details-table td{
+.car-details-table td, .purchase-details-table td {
     text-align: left;
 }
 
-.car-details-table tr, .purchase-details-table tr{
+.car-details-table tr, .purchase-details-table tr {
     border-bottom: 1px solid #d0d0ce;
 }
 
-.car-details button{
+.car-details button {
     margin: 5px 0px 5px 0px;
 }
-.new-car-form button{
+
+.new-car-form button, .update-car-form button{
     margin: 10px 0 0 10%;
     width: 81%;
 }
 
-#aside-menu{
+#aside-menu {
     background: linear-gradient(to bottom, white, #bfbfbf);
     height: 150px;
     width: 200px;
@@ -154,8 +158,14 @@ a:focus {
     border-bottom-right-radius: 20px;
 }
 
-.aside-group{
+.aside-group {
     margin: 15px;
     font-size: 18px;
     line-height: 2em;
+}
+
+.dropdown {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }

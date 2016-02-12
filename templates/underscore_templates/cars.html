@@ -1,11 +1,16 @@
 {% load staticfiles %}
 <script type="text/template" id="carsTemplate">
+    <div class="pagination-holder">
+        <div id="car-pagination" class="pagination light-theme simple-pagination">
+
+        </div>
+    </div>
     <article class="car-list row">
         <%
         _.each( data, function(car){
-            var newDate = car.last_update_date.split('T')[0].split("-");
-            newDate = newDate[1]+'.'+newDate[2]+'.'+newDate[0];
-            var available = (car.available) ? "Available" : "Sold"
+        var newDate = car.last_update_date.split('T')[0].split("-");
+        newDate = newDate[1]+'.'+newDate[2]+'.'+newDate[0];
+        var available = (car.available) ? "Available" : "Sold"
         %>
         <section class="car-info col-xs-8 col-xs-offset-2">
             <div class="car-image hidden-xs">
@@ -15,12 +20,28 @@
                 <h3 class="car-title">
                     <a class="car-link" href="#cars/<%- car.id %>"> <%- car.model %></a>
                 </h3>
+
                 <p>Mileage: <%- car.mileage %> km</p>
+
                 <p>Location: <%- car.location %></p>
+
                 <p>Updated: <%- newDate %>
+
                 <p>Status: <%- available %></p>
+
                 <p class="car-price"><%- car.price %> €</p>
             </div>
+            <% if (car.owner == authUserUsername) { %>
+            <div class="dropdown">
+                <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#edit-car/<%- car.id %>">Edit</a></li>
+                    <li><a href="#delete-car/<%- car.id %>">Delete</a></li>
+                </ul>
+            </div>
+            <% } %>
         </section>
         <%
         });

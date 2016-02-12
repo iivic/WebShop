@@ -1,7 +1,4 @@
-/**
- * Created by ee on 1/28/16.
- */
-$(function(){
+$(function () {
     console.log("Start of script!");
     // GET COOKIE INFO
     function getCookie(name) {
