@@ -23,8 +23,7 @@ app.CarModel = Backbone.Model.extend({
     },
     url: function () {
         return BASE_URL + this.path;
-    },
-    urlRoot: BASE_URL
+    }
 });
 
 app.PurchaseModel = Backbone.Model.extend({

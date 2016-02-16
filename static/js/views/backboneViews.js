@@ -24,7 +24,7 @@ app.MainAppView = Backbone.View.extend({
                 console.log("Error! Car makers couldn't be fetched.");
             }
         });
-    },
+    }
 });
 //==================
 //Group of cars view
@@ -60,6 +60,9 @@ app.ChosenCarMakerView = Backbone.View.extend({
 app.ChosenCarView = Backbone.View.extend({
     template: _.template($("#carDetailsTemplate").html()),
 
+    events: {
+        "click #purchase-car": "purchaseCar"
+    },
     render: function () {
         var context = this;
         var templateData = this.model.attributes;
@@ -85,6 +88,40 @@ app.ChosenCarView = Backbone.View.extend({
                 console.log("Error in ChosenCarView! Car couldn't be fetched.");
             }
         });
+    },
+    purchaseCar: function () {
+        var cardNumber = $("#cardNumberInput").val();
+        if (cardNumber == "") {
+            alert("Please enter your card number!")
+        }
+        else {
+            var context = this;
+            var carID = $("#purchase-car").attr("data-car-id");
+            var price = $("#priceForPurchase").text();
+            var discount = $("#discountForPurchase").text();
+            var pricePaid = price - (price * discount / 100);
+            var purchaseModel = new app.PurchaseModel([], {
+                path: 'purchase/'
+            });
+            purchaseModel.set({
+                car: carID, credit_card_number: cardNumber, price_paid: pricePaid
+            });
+            console.log(purchaseModel);
+            purchaseModel.save({}, {
+                success: function () {
+                    console.log("Purchase saved!");
+                    context.unbind();
+                    context.remove();
+                    $('.modal-backdrop').remove();
+                    $('.modal-open').removeAttr("style");
+                    $('.modal-open').removeClass("modal-open");
+                    window.location = BASE_URL + "web-shop/#my-purchases";
+                },
+                error: function () {
+                    console.log("Error saving purchase in ChosenCarView!");
+                }
+            });
+        }
     }
 });
 //=================

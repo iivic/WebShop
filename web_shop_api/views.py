@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from web_shop_api.serializers import UserSerializer, CarMakerSerializer, CarSerializer, PurchaseSerializer
 from rest_framework import permissions, filters
 from web_shop_api.permissions import IsOwnerOrReadOnly, IsAdminOrReadOnly
+from django.shortcuts import get_object_or_404
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -48,10 +49,13 @@ class PurchaseViewSet(viewsets.ModelViewSet):
     """
     queryset = Purchase.objects.all()
     serializer_class = PurchaseSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsAdminOrReadOnly)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('user', )
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+        car_purchased = get_object_or_404(Car, pk=serializer.data['car'])
+        car_purchased.available = False
+        car_purchased.save(update_fields=['available'])

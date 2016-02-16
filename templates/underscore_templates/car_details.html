@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <th>Price :</th>
-                <td><%- data.price %> €</td>
+                <td><span id="priceForPurchase"><%- data.price %></span> €</td>
             </tr>
             <tr>
                 <th>Manufacturing year :</th>
@@ -46,23 +46,48 @@
             </tr>
             <tr>
                 <th>Discount :</th>
-                <td><%- (data.discount==0) ? 'None' : data.discount+" %" %></td>
+                <td><span id="discountForPurchase"><%- data.discount %></span> %</td>
             </tr>
             <tr>
                 <th>Last update :</th>
                 <td><%- newDate %></td>
             </tr>
         </table>
-        <% if (data.owner != authUserUsername) { %>
-        <button class="btn btn-success btn-block">Purchase</button>
+        <% if(data.owner == authUserUsername) { %>
+        <button class="btn btn-danger btn-block">Your car</button>
+
         <% }
         else if(data.available == false){
         %>
         <button class="btn btn-danger btn-block">Sold</button>
         <% }
-        else if(data.owner == authUserUsername){
+        else if(data.owner != authUserUsername){
         %>
-        <button class="btn btn-danger btn-block">Your car</button>
+        <button class="btn btn-success btn-block" data-toggle="modal" data-target="#purchaseModal">
+            Purchase
+        </button>
         <% } %>
     </section>
+
+    <div id="purchaseModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Enter your credit card number</h4>
+                </div>
+                <div class="modal-body">
+                    <input id="cardNumberInput" type="text" placeholder="Credit card number">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="purchase-car" class="btn btn-success" data-car-id="<%- data.id %>">Confirm</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </script>
