@@ -12,13 +12,17 @@ app.CarMakersCollection = Backbone.Collection.extend({
 //===============
 //Cars collection
 //===============
-app.CarsCollection = Backbone.Collection.extend({
+app.CarsCollection = Backbone.PageableCollection.extend({
     model: app.CarModel,
     initialize: function (models, options) {
         this.path = options.path;
     },
     url: function () {
         return BASE_URL + this.path;
+    },
+    mode: "client",
+    state: {
+        pageSize: 5
     }
 });
 //====================
@@ -26,7 +30,12 @@ app.CarsCollection = Backbone.Collection.extend({
 //====================
 app.PurchasesCollection = Backbone.Collection.extend({
     model: app.PurchaseModel,
-    url: BASE_URL + 'purchase/'
+    initialize: function (models, options) {
+        this.path = options.path;
+    },
+    url: function () {
+        return BASE_URL + this.path;
+    }
 });
 //====================
 //Users collection

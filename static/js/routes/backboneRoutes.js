@@ -14,7 +14,7 @@ app.MainRouter = Backbone.Router.extend({
     },
 
     resetTemplate: function () {
-      $('#main-content').html('<h1 class="jumbotron"></h1><section id="content" class="container"></section>');
+        $('#main-content').html('<h1 class="jumbotron"></h1><section id="content" class="container"></section>');
     },
 
     mainPage: function () {
@@ -33,33 +33,33 @@ app.MainRouter = Backbone.Router.extend({
         var car = new app.CarModel([], {path: 'cars/' + id + '/'});
         new app.ChosenCarView({model: car, el: $('#content')});
     },
-    showMyCars: function (){
+    showMyCars: function () {
         this.resetTemplate();
-        var cars = new app.CarModel([], {path: 'cars/?owner=' + authUserId});
-        new app.CurrentUserCars({model: cars, el: $('#content')});
+        var cars = new app.CarsCollection([], {path: 'cars/?owner=' + authUserId});
+        new app.CurrentUserCars({collection: cars, el: $('#content')});
     },
     showMyPurchases: function () {
         this.resetTemplate();
-        var purchases = new app.PurchaseModel([], {path: 'purchase/?user=' + authUserId});
-        new app.CurrentUserPurchases({model: purchases, el: $('#content')});
+        var purchases = new app.PurchasesCollection([], {path: 'purchase/?user=' + authUserId});
+        new app.CurrentUserPurchases({collection: purchases, el: $('#content')});
     },
     addNewCar: function () {
         this.resetTemplate();
         new app.AddNewCar({el: $('#content')});
     },
-    deleteCar: function (id){
+    deleteCar: function (id) {
         var carToDelete = new app.CarModel({id: id}, {path: 'cars/' + id + "/"});
         carToDelete.destroy({
-            success: function(){
+            success: function () {
                 alert("Car successfully deleted!");
                 window.location = BASE_URL + "web-shop/#my-cars";
             },
-            error: function(){
+            error: function () {
                 alert("Failed to delete car!");
             }
         });
     },
-    editCar: function(id){
+    editCar: function (id) {
         this.resetTemplate();
         var carToEdit = new app.CarModel({id: id}, {path: 'cars/' + id + "/"});
         new app.UpdateCarInfo({model: carToEdit, el: $("#content")});
@@ -70,5 +70,5 @@ var mainRouter = new app.MainRouter();
 Backbone.history.start();
 
 /*Backbone.history.on("all", function (route, router) {
-    console.log(window.location.hash);
-});*/
+ console.log(window.location.hash);
+ });*/

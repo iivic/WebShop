@@ -169,3 +169,7 @@ a:focus {
     top: 5px;
     right: 5px;
 }
+
+.car-list-buttons{
+    padding-bottom: 10px;
+}

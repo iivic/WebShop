@@ -1,16 +1,15 @@
 {% load staticfiles %}
 <script type="text/template" id="carsTemplate">
-    <div class="pagination-holder">
-        <div id="car-pagination" class="pagination light-theme simple-pagination">
-
-        </div>
+    <div class="car-list-buttons">
+        <button class="btn btn-primary <% if(flag=="first") { %>disabled<% } %>" id="previousCarListButton">Previous</button>
+        <button class="btn btn-primary <% if(flag=="last") { %>disabled<% } %>" id="nextCarListButton">Next</button>
     </div>
     <article class="car-list row">
         <%
         _.each( data, function(car){
-        var newDate = car.last_update_date.split('T')[0].split("-");
+        var newDate = car.attributes.last_update_date.split('T')[0].split("-");
         newDate = newDate[1]+'.'+newDate[2]+'.'+newDate[0];
-        var available = (car.available) ? "Available" : "Sold"
+        var available = (car.attributes.available) ? "Available" : "Sold"
         %>
         <section class="car-info col-xs-8 col-xs-offset-2">
             <div class="car-image hidden-xs">
@@ -18,27 +17,27 @@
             </div>
             <div class="car-description col-sm-7 col-xs-12">
                 <h3 class="car-title">
-                    <a class="car-link" href="#cars/<%- car.id %>"> <%- car.model %></a>
+                    <a class="car-link" href="#cars/<%- car.attributes.id %>"> <%- car.attributes.model %></a>
                 </h3>
 
-                <p>Mileage: <%- car.mileage %> km</p>
+                <p>Mileage: <%- car.attributes.mileage %> km</p>
 
-                <p>Location: <%- car.location %></p>
+                <p>Location: <%- car.attributes.location %></p>
 
                 <p>Updated: <%- newDate %>
 
                 <p>Status: <%- available %></p>
 
-                <p class="car-price"><%- car.price %> €</p>
+                <p class="car-price"><%- car.attributes.price %> €</p>
             </div>
-            <% if (car.owner == authUserUsername) { %>
+            <% if (car.attributes.owner == authUserUsername) { %>
             <div class="dropdown">
                 <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="#edit-car/<%- car.id %>">Edit</a></li>
-                    <li><a href="#delete-car/<%- car.id %>">Delete</a></li>
+                    <li><a href="#edit-car/<%- car.attributes.id %>">Edit</a></li>
+                    <li><a href="#delete-car/<%- car.attributes.id %>">Delete</a></li>
                 </ul>
             </div>
             <% } %>

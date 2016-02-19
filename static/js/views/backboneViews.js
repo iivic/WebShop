@@ -8,7 +8,7 @@ app.MainAppView = Backbone.View.extend({
     template: _.template($('#carMakersTemplate').html()),
 
     render: function () {
-        var templateData = this.collection.models[0].attributes.results;
+        var templateData = this.collection.models;
         this.$el.html(this.template({data: templateData}));
     },
 
@@ -31,15 +31,42 @@ app.MainAppView = Backbone.View.extend({
 //==================
 app.ChosenCarMakerView = Backbone.View.extend({
     template: _.template($("#carsTemplate").html()),
-
-    render: function () {
-        var templateData = this.collection.models[0].attributes.results;
-        //TODO pagination on cars
-        console.log(this.collection.models[0].attributes);
-        console.log(Math.ceil(this.collection.models[0].attributes.count / 10));
-        this.$el.html(this.template({data: templateData}));
+    events: {
+        "click #previousCarListButton": "previousCarPage",
+        "click #nextCarListButton": "nextCarPage"
     },
-
+    nextCarPage: function () {
+        var lastPage = this.collection.state.lastPage;
+        var currentPage = this.collection.state.currentPage;
+        if (currentPage == lastPage) alert("Last page!");
+        else {
+            this.collection.getNextPage();
+            this.render();
+        }
+    },
+    previousCarPage: function () {
+        var firstPage = this.collection.state.firstPage;
+        var currentPage = this.collection.state.currentPage;
+        if (currentPage == firstPage) alert("First page!");
+        else {
+            this.collection.getPreviousPage();
+            this.render();
+        }
+    },
+    render: function () {
+        var firstPage = this.collection.state.firstPage;
+        var lastPage = this.collection.state.lastPage;
+        var currentPage = this.collection.state.currentPage;
+        var flag = "";
+        if (currentPage == firstPage) {
+            flag = "first";
+        }
+        else if (currentPage == lastPage) {
+            flag = "last";
+        }
+        var templateData = this.collection.models;
+        this.$el.html(this.template({data: templateData, flag: flag}));
+    },
     initialize: function () {
         $(".jumbotron").text("Welcome to this awesome car web shop!");
         var context = this;
@@ -69,7 +96,7 @@ app.ChosenCarView = Backbone.View.extend({
         var carMaker = new app.CarMakerModel([], {path: 'car-maker/?id=' + templateData.maker});
         carMaker.fetch({
             success: function () {
-                context.$el.html(context.template({data: templateData, carMaker: carMaker.attributes.results[0]}));
+                context.$el.html(context.template({data: templateData, carMaker: carMaker.attributes[0]}));
             },
             error: function () {
                 console.log("Error in ChosenCarView! CarMaker couldn't be fetched.");
@@ -129,15 +156,47 @@ app.ChosenCarView = Backbone.View.extend({
 //=================
 app.CurrentUserCars = Backbone.View.extend({
     template: _.template($("#carsTemplate").html()),
+    events: {
+        "click #previousCarListButton": "previousCarPage",
+        "click #nextCarListButton": "nextCarPage"
+    },
+    nextCarPage: function () {
+        var lastPage = this.collection.state.lastPage;
+        var currentPage = this.collection.state.currentPage;
+        if (currentPage == lastPage) alert("Last page!");
+        else {
+            this.collection.getNextPage();
+            this.render();
+        }
 
+    },
+    previousCarPage: function () {
+        var firstPage = this.collection.state.firstPage;
+        var currentPage = this.collection.state.currentPage;
+        if (currentPage == firstPage) alert("First page!");
+        else {
+            this.collection.getPreviousPage();
+            this.render();
+        }
+    },
     render: function () {
-        var templateData = this.model.attributes.results;
-        this.$el.html(this.template({data: templateData}));
+        var firstPage = this.collection.state.firstPage;
+        var lastPage = this.collection.state.lastPage;
+        var currentPage = this.collection.state.currentPage;
+        var flag = "";
+        if (currentPage == firstPage) {
+            flag = "first";
+        }
+        else if (currentPage == lastPage) {
+            flag = "last";
+        }
+        var templateData = this.collection.models;
+        this.$el.html(this.template({data: templateData, flag: flag}));
     },
     initialize: function () {
         $(".jumbotron").text("My cars");
         var context = this;
-        this.model.fetch({
+        this.collection.fetch({
             success: function () {
                 console.log("Success! Cars fetched.");
                 context.render();
@@ -156,13 +215,14 @@ app.CurrentUserPurchases = Backbone.View.extend({
     template: _.template($("#userPurchasesTemplate").html()),
 
     render: function () {
-        var templateData = this.model.attributes.results;
+        console.log(this.collection.models[0]);
+        var templateData = this.collection.models;
         this.$el.html(this.template({data: templateData}));
     },
     initialize: function () {
         $(".jumbotron").text("My purchases");
         var context = this;
-        this.model.fetch({
+        this.collection.fetch({
             success: function () {
                 console.log("Success! Cars fetched.");
                 context.render();

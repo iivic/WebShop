@@ -1,7 +1,7 @@
 <script type="text/template" id="userPurchasesTemplate">
     <%
     _.each(data, function(purchase){
-    var newDate = purchase.purchase_date.split('T')[0].split("-");
+    var newDate = purchase.attributes.purchase_date.split('T')[0].split("-");
     newDate = newDate[1]+'.'+newDate[2]+'.'+newDate[0];
     %>
     <section class="purchase-details col-sm-offset-3 col-sm-6">
@@ -12,14 +12,14 @@
             </tr>
             <tr>
                 <th>Credit card number :</th>
-                <td><%- purchase.credit_card_number %></td>
+                <td><%- purchase.attributes.credit_card_number %></td>
             </tr>
             <tr>
                 <th>Price paid :</th>
-                <td><%- purchase.price_paid %> €</td>
+                <td><%- purchase.attributes.price_paid %> €</td>
             </tr>
         </table>
-        <a href="#cars/<%- purchase.car %>" class="btn btn-info btn-block">See car details</a>
+        <a href="#cars/<%- purchase.attributes.car %>" class="btn btn-info btn-block">See car details</a>
     </section>
     <% }) %>
 </script>

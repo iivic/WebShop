@@ -107,10 +107,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
-# REST settings
-REST_FRAMEWORK = {
-    'PAGE_SIZE': 10
-}
+
 
 # Login and logout urls
 LOGIN_URL = 'login'
